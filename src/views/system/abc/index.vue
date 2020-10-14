@@ -5,11 +5,12 @@
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
         <label class="el-form-item-label">id</label>
-        <el-input v-model="query.id" clearable placeholder="id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <el-input v-model="query.id" clearable placeholder="输入id查找" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">field1</label>
-        <el-input v-model="query.field1" clearable placeholder="field1" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <el-input v-model="query.field1" clearable placeholder="输入field1查找" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">createTime</label>
-        <el-input v-model="query.createTime" clearable placeholder="createTime" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <el-input v-model="query.createTime" clearable placeholder="输入createTime查找" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--搜索 重置组件-->
         <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
@@ -36,9 +37,9 @@
       <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column type="selection" width="55" />
         <el-table-column prop="field1" label="field1">
-          <template slot-scope="scope">
-            {{ dict.label.user_status[scope.row.field1] }}
-          </template>
+          <!--          <template slot-scope="scope">-->
+          <!--            {{ dict.label.user_status[scope.row.field1] }}-->
+          <!--          </template>-->
         </el-table-column>
         <el-table-column prop="field2" label="field2" />
         <el-table-column prop="createTime" label="createTime">
@@ -48,6 +49,7 @@
         </el-table-column>
         <el-table-column v-permission="['admin','abc:edit','abc:del']" label="操作" width="150px" align="center">
           <template slot-scope="scope">
+            <!--删除组件-->
             <udOperation
               :data="scope.row"
               :permission="permission"
